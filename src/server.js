@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 const routes = require('./routes');
 
 const app = express();
 
-require("custom-env").env();
+require('custom-env').env();
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
@@ -15,6 +16,7 @@ mongoose.connect(process.env.MONGO_URL, {
 
 app.use(cors());
 app.use(express.json());
+app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')));
 app.use(routes);
 
 app.listen(3333);
