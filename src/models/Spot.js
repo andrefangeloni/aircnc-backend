@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const IP = '192.168.15.12';
+
 const SpotSchema = new mongoose.Schema(
   {
     thumbnail: String,
@@ -19,7 +21,7 @@ const SpotSchema = new mongoose.Schema(
 );
 
 SpotSchema.virtual('thumbnail_url').get(function() {
-  return `http://localhost:3333/files/${this.thumbnail}`;
+  return `http://${IP}:3333/files/${this.thumbnail}`;
 });
 
 module.exports = mongoose.model('Spot', SpotSchema);
